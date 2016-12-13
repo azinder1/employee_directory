@@ -1,0 +1,15 @@
+<h1>Update <%=@department.name() %> </h1>
+
+<form action="/department/<%=@department.id() %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <label for="name">Rename this group:</label>
+  <input id="name" name="name" type="text">
+
+  <button type="submit">Update</button>
+</form>
+
+<ul>
+  <% @employees.each() do |employee| %>
+    <li><%= employee.name %></li>
+  <%end%>
+</ul>

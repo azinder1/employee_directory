@@ -1,0 +1,41 @@
+<a href="/">Return to homepage</a>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Add a Employee</h2>
+      <form action="/employees" method="post">
+        <div class="form-group">
+          <label for="name">Employee Name</label>
+          <input type="text" name="name" id="name">
+        </div>
+        <div class="form-group">
+          <select name="departments" class="form_group">
+            <% @departments.each() do |department| %>
+            <option value="<%= department.id %>"> <%= department.name %> </option>
+            <% end %>
+          </select>
+        </div>
+        <button type="submit" name="button">Submit</button>
+      </form>
+
+    </div>
+    <div class="col-md-4">
+      <h2>Employee Listings</h2>
+      <% if @departments == nil %>
+      <h3>You need a department to assign add an employee</h3>
+      <% elsif @employees == nil%>
+        <h3>You have not created any employees yet</h3>
+      <% else%>
+      <% @employees.each() do |employee| %>
+        <li><a value = "<%= employee.id %>" name = "employee_id" href="/employee/<%= employee.id() %>/edit"> <%= employee.name %></a></li>
+        <form action="/employees" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="id" value = "<%= employee.id %>">
+          <button type="submit" class="btn-danger btn btn-sm">Delete</button>
+        </form>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+</div>

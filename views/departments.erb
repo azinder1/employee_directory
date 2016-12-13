@@ -1,0 +1,30 @@
+<a href="/">Return to homepage</a>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Add a Department</h2>
+      <form action="/departments" method="post">
+        <label for="name">Department Name</label>
+        <input type="text" name="name" id="name">
+        <button type="submit" name="button">Submit</button>
+      </form>
+
+    </div>
+    <div class="col-md-4">
+      <h2>Department Listings</h2>
+      <% if @departments == nil %>
+      <h3>There are no departments listed yet</h3>
+      <% else%>
+      <% @departments.each() do |department| %>
+        <li><a value = "<%= department.id %>" name = "department_id" href="/department/<%= department.id() %>/edit"> <%= department.name %></a></li>
+        <form action="/departments" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="id" value = "<%= department.id %>">
+          <button type="submit" class="btn-danger btn btn-sm">Delete</button>
+        </form>
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+</div>
